@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebSocket 连接</title>
+  </head>
+  <body>
+    <button onclick="sendMsg()">发送 WebSocket 连接</button>
+    <script>
+      const ws = new WebSocket("ws://localhost:8080")
+
+      ws.addEventListener("open", function (e) {
+        ws.send("客户端 WebSocket 连接已打开")
+      })
+      ws.addEventListener("message", function (e) {
+        console.log("客户端收到消息：" + e.data)
+        // ws.send("客户端收到消息：" + e.data)
+      })
+
+      const sendMsg = () => {
+        console.log("点击 sendMsg 发送客户端消息")
+        ws.send("你好，我是 WebSocketClient!")
+      }
+    </script>
+  </body>
+</html>
